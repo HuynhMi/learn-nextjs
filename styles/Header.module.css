@@ -1,0 +1,33 @@
+.wrap {
+    border-bottom: 1px solid #ccc;
+    background-color: #BAD7CB;
+}
+
+.inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100px;
+}
+
+.navigate {
+    display: flex;
+    
+}
+
+.navigateLink {
+    font-size: 1.6rem;
+    text-transform: capitalize;
+    font-weight: 600;
+
+    padding: 10px 15px;
+
+    cursor: pointer;
+
+}
+
+
+.navigateLink:hover {
+    color: #fff;
+    transition: all linear 150ms;
+}
