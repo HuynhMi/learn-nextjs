@@ -14,6 +14,11 @@ const nanLinks = [
 		name: 'about',
 		href: '/about',
 	},
+	{
+		id: 4,
+		name: 'Login',
+		href: '/signin',
+	},
 ];
 
 export default nanLinks;
