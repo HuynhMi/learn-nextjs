@@ -1,6 +1,7 @@
 import BlogList from '@/components/BlogList';
 import Title from '@/components/Title';
 import { getBlogs } from '@/data/blogs';
+import { getData } from '@/services/useFireStore';
 export default function Home({ blogs }) {
 	return (
 		<>
@@ -13,10 +14,11 @@ export default function Home({ blogs }) {
 	);
 }
 
-export const getStaticProps = () => {
+export const getStaticProps = async () => {
+	const blogs = await getData('blogs');
 	return {
 		props: {
-			blogs: getBlogs(),
+			blogs,
 		},
 	};
 };

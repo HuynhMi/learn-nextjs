@@ -30,6 +30,10 @@ h2 {
     font-size: 4.4rem;
 }
 
+h3 {
+    font-size: 3rem;
+}
+
 .text-sm {
     font-size: 1.4rem;
 }
@@ -65,6 +69,10 @@ h2 {
 
 .mb-30 {
     margin-bottom: 30px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
 }
 
 /* PC > */

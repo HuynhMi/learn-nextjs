@@ -1,10 +1,12 @@
-import { getBlogById, getIds } from '@/data/blogs';
+import { getDataById, getIds } from '@/services/useFireStore';
 import style from '@/styles/BlogCard.module.css';
+import formatDate from '@/utils/formatDate';
 import clsx from 'clsx';
+import Link from 'next/link';
 
-export const getStaticPaths = () => {
-	const ids = getIds();
-	const paths = ids.map((id) => ({
+export const getStaticPaths = async () => {
+	const ids = await getIds('blogs');
+	const paths = ids.map(({id}) => ({
 		params: {
 			id: id.toString(),
 		},
@@ -15,9 +17,8 @@ export const getStaticPaths = () => {
 	};
 };
 
-export const getStaticProps = ({ params }) => {
-	const id = params.id * 1;
-	const blog = getBlogById(id);
+export const getStaticProps = async ({ params }) => {
+	const blog = await getDataById(params.id, 'blogs');
 	return {
 		props: {
 			blog: blog,
@@ -26,11 +27,24 @@ export const getStaticProps = ({ params }) => {
 };
 
 function BlogDetail({ blog }) {
-	const { title, tags, desc, time, id, content } = blog;
+	const { name, tags, desc, time, content } = blog;
+	const timer = formatDate(parseInt(time));
+	
 	return (
 		<>
-			<p className={clsx(style.timerTxt, 'text-center')}>{time}</p>
-			<h2 className="text-center">{title}</h2>
+			<p className={clsx(style.timerTxt, 'text-center')}>{timer}</p>
+			<h2 className="text-center">{name}</h2>
+			<div className="text-center">
+				{tags.map((tag, index) => (
+					<Link
+						key={index}
+						href={`/tags/${tag}`}
+						className={style.tag}
+					>
+						{tag}
+					</Link>
+				))}
+			</div>
 			<p className={clsx(style.desc, 'text-md')}>{content}</p>
 		</>
 	);
